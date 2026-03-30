@@ -13,13 +13,13 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.2.1
   shimmer: ^3.0.0
-  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
 
 flutter_icons:
   android: true
@@ -32,3 +32,15 @@ flutter:
   assets:
     - assets/login/
     - assets/landing/
+    - assets/images/
+
+# Native splash (Android / iOS). Regenerate after changes: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#FF6B00"
+  image: assets/login/logo.png
+  android_12:
+    color: "#FF6B00"
+    image: assets/login/logo.png
+  ios: true
+  android: true
+  web: false

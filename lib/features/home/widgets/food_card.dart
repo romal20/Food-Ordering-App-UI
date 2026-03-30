@@ -1,3 +1,7 @@
+// Restaurant card widgets used in the "Recommended" strip.
+//
+// Includes animated scaling, discount/offer badges, and a delivery label row
+// that cycles between "Near & Fast" and delivery time.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +10,7 @@ import '../../../core/theme/app_colors.dart';
 import '../home_controller.dart';
 import '../home_model.dart';
 
+// Public restaurant card widget.
 class FoodCard extends StatefulWidget {
   const FoodCard({
     super.key,
@@ -24,6 +29,7 @@ class FoodCard extends StatefulWidget {
   State<FoodCard> createState() => _FoodCardState();
 }
 
+/// State for the card press-to-zoom animation.
 class _FoodCardState extends State<FoodCard>
     with SingleTickerProviderStateMixin {
   late final AnimationController _scaleCtrl;
@@ -98,6 +104,7 @@ class _FoodCardState extends State<FoodCard>
   }
 }
 
+/// Top image section for a restaurant card (with discount/offer overlays).
 class _CardImage extends StatelessWidget {
   const _CardImage({
     required this.restaurant,
@@ -256,6 +263,7 @@ class _CardImage extends StatelessWidget {
   }
 }
 
+/// Text/info section for a restaurant card.
 class _CardInfo extends StatelessWidget {
   const _CardInfo({required this.restaurant, required this.isDark});
 
@@ -321,6 +329,7 @@ class _CardInfo extends StatelessWidget {
   }
 }
 
+/// Delivery label row with an animated fade transition when label changes.
 class _DeliveryRow extends StatefulWidget {
   const _DeliveryRow({required this.restaurant, required this.isDark});
 
@@ -331,6 +340,7 @@ class _DeliveryRow extends StatefulWidget {
   State<_DeliveryRow> createState() => _DeliveryRowState();
 }
 
+/// State handling the delivery label fade animation.
 class _DeliveryRowState extends State<_DeliveryRow>
     with SingleTickerProviderStateMixin {
   late final AnimationController _fadeCtrl;
@@ -422,6 +432,7 @@ class _DeliveryRowState extends State<_DeliveryRow>
   }
 }
 
+/// Shimmer placeholder matching the shape of [FoodCard].
 class FoodCardShimmer extends StatelessWidget {
   const FoodCardShimmer({
     super.key,

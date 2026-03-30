@@ -1,3 +1,7 @@
+// Home feed widgets for categories, filters, recommended restaurants, and explores.
+//
+// This file contains UI-only widgets that read reactive state from
+// [HomeController] and present shimmer placeholders while loading.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +13,7 @@ import '../home_model.dart';
 import 'category_item.dart';
 import 'food_card.dart';
 
+// Horizontal strip of category pills (single selection).
 class HomeCategoriesStrip extends StatelessWidget {
   const HomeCategoriesStrip({
     super.key,
@@ -53,6 +58,7 @@ class HomeCategoriesStrip extends StatelessWidget {
   }
 }
 
+/// Horizontal strip of selectable quick-filter chips (multi-select).
 class HomeFiltersRow extends StatelessWidget {
   const HomeFiltersRow({
     super.key,
@@ -118,6 +124,7 @@ class HomeFiltersRow extends StatelessWidget {
   }
 }
 
+/// Internal reusable chip used by [HomeFiltersRow].
 class _FilterChip extends StatelessWidget {
   const _FilterChip({
     required this.label,
@@ -209,6 +216,7 @@ class _FilterChip extends StatelessWidget {
   }
 }
 
+/// Header row used for the "Recommended" and "Explore More" sections.
 class HomeSectionHeader extends StatelessWidget {
   const HomeSectionHeader({
     super.key,
@@ -256,6 +264,7 @@ class HomeSectionHeader extends StatelessWidget {
   }
 }
 
+/// Horizontal list of restaurant cards with shimmer loading.
 class HomeRecommendedStrip extends StatelessWidget {
   const HomeRecommendedStrip({
     super.key,
@@ -303,6 +312,7 @@ class HomeRecommendedStrip extends StatelessWidget {
   }
 }
 
+/// Horizontal list of "explore" tiles with press-to-zoom animation.
 class HomeExploreStrip extends StatelessWidget {
   const HomeExploreStrip({
     super.key,
@@ -359,6 +369,7 @@ class HomeExploreStrip extends StatelessWidget {
   }
 }
 
+/// Pressable explore tile (animated scale).
 class _ExploreTile extends StatefulWidget {
   const _ExploreTile({
     required this.item,
@@ -376,6 +387,7 @@ class _ExploreTile extends StatefulWidget {
   State<_ExploreTile> createState() => _ExploreTileState();
 }
 
+/// State for the explore tile scale animation.
 class _ExploreTileState extends State<_ExploreTile>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
@@ -507,6 +519,7 @@ class _ExploreTileState extends State<_ExploreTile>
   }
 }
 
+/// Renders the explore tile background image with error fallback.
 class _ExploreImage extends StatelessWidget {
   const _ExploreImage({required this.item, required this.isDark});
 
@@ -527,6 +540,7 @@ class _ExploreImage extends StatelessWidget {
   }
 }
 
+/// Shimmer placeholder used while explore tiles are loading.
 class _ExploreShimmer extends StatelessWidget {
   const _ExploreShimmer({
     required this.isDark,

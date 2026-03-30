@@ -1,3 +1,7 @@
+// Home banner section widgets.
+//
+// Implements the top carousel with a decorative stripe background, floating
+// search row, and light/dark/theme + veg toggle overlays.
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -10,6 +14,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/screen.dart';
 import '../home_model.dart';
 
+// Top banner carousel + overlays (location/theme buttons and search row).
 class HomeBannerSection extends StatelessWidget {
   const HomeBannerSection({
     super.key,
@@ -95,6 +100,7 @@ class HomeBannerSection extends StatelessWidget {
   }
 }
 
+/// A single banner slide that lays out headline/subline/CTA plus hero image.
 class _BannerSlide extends StatelessWidget {
   const _BannerSlide({
     required this.banner,
@@ -391,6 +397,7 @@ class _BannerHeroImage extends StatelessWidget {
   }
 }
 
+/// Decorative coin dots used to add depth to the banner.
 class _CoinDot extends StatelessWidget {
   const _CoinDot({required this.size});
 
@@ -418,6 +425,7 @@ class _CoinDot extends StatelessWidget {
   }
 }
 
+/// Paints a subtle diagonal stripe pattern across the banner background.
 class _StripePainter extends CustomPainter {
   const _StripePainter();
 
@@ -440,6 +448,7 @@ class _StripePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
+/// Top overlay row shown above the banner (location, theme toggle, etc.).
 class _TopBarOverlay extends StatelessWidget {
   const _TopBarOverlay({
     required this.isDark,
@@ -535,6 +544,7 @@ class _TopBarOverlay extends StatelessWidget {
   }
 }
 
+/// Circular icon button used in the top overlay.
 class _RoundIconButton extends StatelessWidget {
   const _RoundIconButton({
     required this.size,
@@ -566,6 +576,7 @@ class _RoundIconButton extends StatelessWidget {
   }
 }
 
+/// Search row + mic icon and the right-side interactions.
 class _FloatingSearchRow extends StatelessWidget {
   const _FloatingSearchRow({
     required this.isDark,
@@ -653,6 +664,7 @@ class _FloatingSearchRow extends StatelessWidget {
   }
 }
 
+/// VEG toggle pill (animated) shown at the bottom of the banner overlay.
 class _VegToggle extends StatelessWidget {
   const _VegToggle({
     required this.isOn,

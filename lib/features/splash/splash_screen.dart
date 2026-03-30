@@ -1,3 +1,4 @@
+// Splash screen shown on app launch with a short animation and navigation to login.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/utils/screen.dart';
 
+/// Displays the animated app logo and tagline before redirecting to login.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -13,6 +15,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+/// Internal state for [SplashScreen], including the animation controller and timer.
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
@@ -32,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
     _fade = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);
     _ctrl.forward();
 
+    // Navigates after the intro animation completes.
     Future.delayed(const Duration(milliseconds: 2200), () {
       if (mounted) Get.offAllNamed(AppRoutes.login);
     });
@@ -45,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Size the logo relative to the current screen width while keeping it reasonable.
     final logo = (context.sw * 0.26).clamp(88.0, 120.0);
 
     return Scaffold(

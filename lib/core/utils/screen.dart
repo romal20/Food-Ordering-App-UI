@@ -1,3 +1,4 @@
+// Responsive sizing helpers built on `MediaQuery` and text scaling.
 import 'package:flutter/material.dart';
 
 /// Responsive helpers using [MediaQuery.sizeOf].

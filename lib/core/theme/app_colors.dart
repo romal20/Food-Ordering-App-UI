@@ -1,5 +1,7 @@
+// Centralized app color palette used by `AppTheme` and UI widgets.
 import 'package:flutter/material.dart';
 
+/// Static color constants shared across the app.
 class AppColors {
   AppColors._();
 

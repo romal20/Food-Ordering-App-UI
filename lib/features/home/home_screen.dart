@@ -1,3 +1,7 @@
+// Home screen UI for `FoodieGo`.
+//
+// Composes the banner, category strip, filters, recommended restaurants, and
+// explore tiles using `HomeController`.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'home_controller.dart';
@@ -7,6 +11,7 @@ import '../../widgets/app_scaffold_background.dart';
 import 'widgets/home_banner_section.dart';
 import 'widgets/home_feed_sections.dart';
 
+// Displays the main food discovery and ordering layout.
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 

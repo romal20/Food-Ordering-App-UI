@@ -1,3 +1,7 @@
+// Login UI for FoodieGo.
+//
+// Renders email/password inputs and provider sign-in buttons (Google + Apple)
+// and delegates all behavior to [LoginController].
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +14,7 @@ import '../../widgets/app_scaffold_background.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_textfield.dart';
 
+// Main login screen.
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
@@ -60,6 +65,7 @@ class LoginScreen extends GetView<LoginController> {
 }
 
 class _LogoSection extends StatefulWidget {
+  /// Animated logo + tagline header.
   const _LogoSection({required this.isDark});
 
   final bool isDark;
@@ -68,6 +74,7 @@ class _LogoSection extends StatefulWidget {
   State<_LogoSection> createState() => _LogoSectionState();
 }
 
+/// Animation state for the logo + tagline header.
 class _LogoSectionState extends State<_LogoSection>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
@@ -76,6 +83,7 @@ class _LogoSectionState extends State<_LogoSection>
 
   @override
   void initState() {
+    // Initializes the fade/slide animation for the logo section.
     super.initState();
     _ctrl = AnimationController(
       vsync: this,
@@ -136,6 +144,7 @@ class _LogoSectionState extends State<_LogoSection>
 }
 
 class _AppLogo extends StatelessWidget {
+  /// Circular app logo image used in the login header.
   const _AppLogo({required this.size});
 
   final double size;
@@ -178,6 +187,7 @@ class _AppLogo extends StatelessWidget {
 }
 
 class _LoginCard extends StatefulWidget {
+  /// Card containing the login form and social buttons.
   const _LoginCard({required this.controller, required this.isDark});
 
   final LoginController controller;
@@ -187,6 +197,7 @@ class _LoginCard extends StatefulWidget {
   State<_LoginCard> createState() => _LoginCardState();
 }
 
+/// Animation state for the login card entrance transition.
 class _LoginCardState extends State<_LoginCard>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
@@ -195,6 +206,7 @@ class _LoginCardState extends State<_LoginCard>
 
   @override
   void initState() {
+    // Card entry animation (fade + slide) for a polished first render.
     super.initState();
     _ctrl = AnimationController(
       vsync: this,
@@ -351,6 +363,7 @@ class _LoginCardState extends State<_LoginCard>
 }
 
 class _LoginDivider extends StatelessWidget {
+  /// Divider text: "or continue with".
   const _LoginDivider({required this.isDark});
 
   final bool isDark;
@@ -378,6 +391,7 @@ class _LoginDivider extends StatelessWidget {
 }
 
 class _SocialButtons extends StatelessWidget {
+  /// Row of provider sign-in buttons (Google, optional Apple, and Guest).
   const _SocialButtons({required this.controller, required this.isDark});
 
   final LoginController controller;
@@ -388,45 +402,50 @@ class _SocialButtons extends StatelessWidget {
     return Obx(() {
       final loading = controller.isLoading.value;
       final type = controller.activeLoginType.value;
-      return Row(
-        children: [
-          Expanded(
-            child: _SocialBtn(
-              label: 'Google',
-              imagePath: 'assets/login/google.png',
-              isLoading: loading && type == LoginType.google,
-              isDark: isDark,
-              onTap: controller.loginWithGoogle,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: _SocialBtn(
-              label: 'Apple',
-              imagePath: 'assets/login/apple.png',
-              isLoading: loading && type == LoginType.apple,
-              isDark: isDark,
-              onTap: controller.loginWithApple,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: _SocialBtn(
-              label: 'Guest',
-              imagePath: 'assets/login/guest.jpg',
-              isLoading: loading && type == LoginType.guest,
-              isDark: isDark,
-              onTap: controller.loginAsGuest,
-              isCircularImage: true,
-            ),
-          ),
-        ],
+      return LayoutBuilder(
+        builder: (ctx, constraints) {
+          final gap = constraints.maxWidth < 420 ? 8.0 : 12.0;
+
+          final googleBtn = _SocialBtn(
+            label: 'Google',
+            imagePath: 'assets/login/google.png',
+            isLoading: loading && type == LoginType.google,
+            isDark: isDark,
+            onTap: controller.loginWithGoogle,
+          );
+          final appleBtn = _SocialBtn(
+            label: 'Apple',
+            imagePath: 'assets/login/apple.png',
+            isLoading: loading && type == LoginType.apple,
+            isDark: isDark,
+            onTap: controller.loginWithApple,
+          );
+          final guestBtn = _SocialBtn(
+            label: 'Guest',
+            imagePath: 'assets/login/guest.jpg',
+            isLoading: loading && type == LoginType.guest,
+            isDark: isDark,
+            onTap: controller.loginAsGuest,
+            isCircularImage: true,
+          );
+
+          return Row(
+            children: [
+              Expanded(child: googleBtn),
+              SizedBox(width: gap),
+              Expanded(child: appleBtn),
+              SizedBox(width: gap),
+              Expanded(child: guestBtn),
+            ],
+          );
+        },
       );
     });
   }
 }
 
 class _SocialBtn extends StatefulWidget {
+  /// Single provider button with press animation and optional loader.
   const _SocialBtn({
     required this.label,
     required this.imagePath,
@@ -447,6 +466,7 @@ class _SocialBtn extends StatefulWidget {
   State<_SocialBtn> createState() => _SocialBtnState();
 }
 
+/// State for provider button press scaling animation.
 class _SocialBtnState extends State<_SocialBtn> {
   double _scale = 1.0;
 
@@ -530,6 +550,8 @@ class _SocialBtnState extends State<_SocialBtn> {
                   fontWeight: FontWeight.w600,
                   color: textColor,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -540,6 +562,7 @@ class _SocialBtnState extends State<_SocialBtn> {
 }
 
 class _SignUpRow extends StatelessWidget {
+  /// Inline "Sign Up" call-to-action row (placeholder for now).
   const _SignUpRow({required this.controller, required this.isDark});
 
   final LoginController controller;

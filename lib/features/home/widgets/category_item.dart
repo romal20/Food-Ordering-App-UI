@@ -1,9 +1,11 @@
+// Category item widget used in the home categories carousel.
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/screen.dart';
 import '../home_model.dart';
 
+/// Single selectable category avatar + label.
 class CategoryItem extends StatefulWidget {
   const CategoryItem({
     super.key,
@@ -22,6 +24,7 @@ class CategoryItem extends StatefulWidget {
   State<CategoryItem> createState() => _CategoryItemState();
 }
 
+/// State backing the animated scale effect when tapping the category.
 class _CategoryItemState extends State<CategoryItem>
     with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;

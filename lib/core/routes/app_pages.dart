@@ -1,3 +1,4 @@
+// GetX page definitions and dependency bindings for each app route.
 import 'package:get/get.dart';
 import '../../features/home/home_controller.dart';
 import '../../features/login/login_controller.dart';
@@ -6,6 +7,7 @@ import '../../features/login/login_screen.dart';
 import '../../features/splash/splash_screen.dart';
 import 'app_routes.dart';
 
+/// Route -> widget + binding mapping for the application.
 abstract final class AppPages {
   static final List<GetPage<dynamic>> routes = [
     GetPage(

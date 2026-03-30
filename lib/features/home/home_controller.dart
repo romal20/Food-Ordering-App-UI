@@ -1,9 +1,14 @@
+// Home feature controller.
+//
+// Manages reactive UI state for the home screen (category selection, filters,
+// banner pagination) and seeds mock data for the feed sections.
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/constants/app_assets.dart';
 import 'home_model.dart';
 
+// GetX controller backing the main home feed.
 class HomeController extends GetxController {
   final selectedCategory = 'all'.obs;
   final isLocationOn = true.obs;
@@ -55,6 +60,7 @@ class HomeController extends GetxController {
   Timer? _deliveryTimer;
 
   @override
+  /// Initializes the banner controller, starts auto-scrolling, and seeds data.
   void onInit() {
     super.onInit();
     bannerPageController = PageController(initialPage: 0);
@@ -62,6 +68,7 @@ class HomeController extends GetxController {
     _loadData();
   }
 
+  /// Periodically advances the banner carousel.
   void _startAutoScroll() {
     _bannerTimer = Timer.periodic(const Duration(seconds: 4), (_) {
       if (!bannerPageController.hasClients) return;
@@ -74,8 +81,10 @@ class HomeController extends GetxController {
     });
   }
 
+  /// Updates [bannerPage] when the user manually swipes between banners.
   void onBannerPageChanged(int page) => bannerPage.value = page;
 
+  /// Cycles the "Near & Fast" label for near-fast restaurants.
   void _startDeliveryLabelCycle() {
     for (final r in recommended) {
       if (r.isNearFast) deliveryLabelIndex[r.id] = 0;
@@ -89,18 +98,21 @@ class HomeController extends GetxController {
     });
   }
 
+  /// Returns the displayed delivery label for a restaurant card.
   String deliveryLabel(Restaurant r) {
     if (!r.isNearFast) return r.deliveryTime;
     final idx = deliveryLabelIndex[r.id] ?? 0;
     return idx == 0 ? 'Near & Fast' : r.deliveryTime;
   }
 
+  /// Whether the current delivery label should show "Near & Fast".
   bool isNearFastLabel(Restaurant r) {
     if (!r.isNearFast) return false;
     return (deliveryLabelIndex[r.id] ?? 0) == 0;
   }
 
   @override
+  /// Cancels timers and disposes the banner page controller.
   void onClose() {
     _bannerTimer?.cancel();
     _deliveryTimer?.cancel();
@@ -108,6 +120,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
+  /// Loads (mock) feed data and toggles [isLoading].
   Future<void> _loadData() async {
     isLoading.value = true;
     await Future.delayed(const Duration(milliseconds: 1400));
@@ -118,9 +131,16 @@ class HomeController extends GetxController {
     _startDeliveryLabelCycle();
   }
 
+  /// Selects a single category by id.
   void selectCategory(String id) => selectedCategory.value = id;
+
+  /// Toggles the "location on/off" UI state.
   void toggleLocation() => isLocationOn.value = !isLocationOn.value;
+
+  /// Toggles the "VEG only" UI state.
   void toggleVeg() => isVegOnly.value = !isVegOnly.value;
+
+  /// Toggles a quick filter chip in [selectedFilters] (multi-select).
   void toggleFilter(String label) {
     final next = List<String>.from(selectedFilters);
     if (next.contains(label)) {
@@ -131,15 +151,18 @@ class HomeController extends GetxController {
     selectedFilters.assignAll(next);
   }
 
+  /// Checks whether a given filter chip is selected.
   bool isFilterSelected(String label) => selectedFilters.contains(label);
 
   @override
+  /// Pull-to-refresh action (mocked).
   Future<void> refresh() async {
     isLoading.value = true;
     await Future.delayed(const Duration(milliseconds: 1000));
     isLoading.value = false;
   }
 
+  /// Seeds category list (mock).
   void _seedCategories() {
     categories.assignAll([
       const FoodCategory(
@@ -180,6 +203,7 @@ class HomeController extends GetxController {
     ]);
   }
 
+  /// Seeds restaurant list (mock).
   void _seedRestaurants() {
     recommended.assignAll([
       const Restaurant(
@@ -261,6 +285,7 @@ class HomeController extends GetxController {
     ]);
   }
 
+  /// Seeds explore tile list (mock).
   void _seedExplore() {
     exploreItems.assignAll([
       const ExploreItem(

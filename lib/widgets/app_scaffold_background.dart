@@ -1,3 +1,4 @@
+// Shared layout wrapper that paints the app's gradient background.
 import 'package:flutter/material.dart';
 import '../core/theme/app_colors.dart';
 

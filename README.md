@@ -17,7 +17,11 @@ It showcases a polished splash → login → home flow with responsive layouts, 
   - Email/phone + password form with validation and inline error messages.
   - Password visibility toggle and “Forgot password?” action (snackbar).
   - Primary “Login” CTA with loading state and disabled while submitting.
-  - Social/alt login buttons (Google, Apple, Guest) with press animations and individual loaders.
+  - Provider sign-in buttons:
+    - “Continue with Google” (Android/iOS)
+    - “Continue with Apple” (iOS only)
+    - “Guest” (mock)
+  with press animations and individual loaders.
   - “Sign up” call to action (currently a placeholder snackbar).
 
 - **Home screen experience**
@@ -70,12 +74,16 @@ It showcases a polished splash → login → home flow with responsive layouts, 
   - `google_fonts` for typography (`Poppins`, `Inter`)
   - `shimmer` for skeleton placeholders
   - `cupertino_icons` for additional icons
+- **Auth Providers**:
+  - `google_sign_in` for Google Sign-In
+  - `sign_in_with_apple` for Apple Sign-In (iOS)
 - **Tooling / Dev Dependencies**:
   - `flutter_lints`
   - `flutter_launcher_icons`
   - `flutter_native_splash`
 
-All data (banners, categories, restaurants, explore tiles) is local mock data – there is no backend or networking in this project.
+This app still uses local UI mock data for the food ordering experience (home banners/categories/etc.) and has no app backend.
+Provider sign-in uses the native OAuth SDKs to authenticate with Google/Apple and then navigates to `HomeScreen`.
 
 ---
 
@@ -104,7 +112,7 @@ Key parts of the `lib/` folder:
     - `splash_screen.dart` – Animated splash and timed navigation to login.
   - `features/login/`
     - `login_screen.dart` – Login UI, social buttons, theming toggle.
-    - `login_controller.dart` – Form state, validation, mock login logic.
+    - `login_controller.dart` – Form state, validation, and provider sign-in handlers (email/guest remain mocked).
   - `features/home/`
     - `home_screen.dart` – Home layout composing banner, categories, filters, recommended, and explore sections.
     - `home_controller.dart` – Seeds mock banners/categories/restaurants/explore items and manages UI state.
@@ -138,11 +146,16 @@ Assets (declared in `pubspec.yaml` and referenced via `AppAssets`):
 
 3. **Login → Home**
    - `LoginScreen` uses `LoginController` from GetX.
-   - On mock login/social/guest actions, it navigates with `Get.offAllNamed(AppRoutes.home)`.
+   - On successful login (email/guest are mocked; Google/Apple use provider sign-in), it navigates with `Get.offAllNamed(AppRoutes.home)`.
 
 4. **Home**
    - `HomeController` is instantiated via route binding when navigating to `/home`.
    - The controller initializes the banner carousel (auto‑scroll), seeds mock data, and toggles loading.
+
+---
+## Provider Sign-In Setup
+- Google Sign-In: this repo does not include `google-services.json` (Android) or `GoogleService-Info.plist` (iOS). Add them in your native projects (or provide `clientId`/`serverClientId` when initializing `GoogleSignIn`) so the Google account picker can work.
+- Apple Sign-In (iOS only): enable the “Sign in with Apple” capability in your Xcode project for the app’s Bundle ID, so the iOS sign-in sheet can be presented.
 
 ---
 

@@ -1,3 +1,7 @@
+/// Data models for the home screen feed sections.
+///
+/// These are plain immutable value objects used by the UI widgets. The app
+/// currently seeds them with local mock data.
 class FoodCategory {
   final String id;
   final String name;
@@ -11,6 +15,7 @@ class FoodCategory {
   });
 }
 
+/// Restaurant card model used in the "Recommended" feed.
 class Restaurant {
   final String id;
   final String name;
@@ -42,6 +47,7 @@ class Restaurant {
   });
 }
 
+/// Explore tile model used in the "Explore More" strip.
 class ExploreItem {
   final String id;
   final String title;
@@ -57,6 +63,7 @@ class ExploreItem {
   });
 }
 
+/// Promotional banner model shown in the top carousel.
 class BannerItem {
   final String headline;
   final String subline;

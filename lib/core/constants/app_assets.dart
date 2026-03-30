@@ -1,3 +1,6 @@
+/// Centralized asset path constants used throughout the UI.
+///
+/// This keeps `Image.asset(...)` calls consistent and avoids hard-coded paths.
 /// Local image paths under [assets/images/](see pubspec assets).
 abstract final class AppAssets {
   AppAssets._();

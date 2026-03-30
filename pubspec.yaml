@@ -12,7 +12,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   get: ^4.6.6
   google_fonts: ^6.2.1
+  google_sign_in: ^7.2.0
   shimmer: ^3.0.0
+  sign_in_with_apple: ^7.0.1
 
 dev_dependencies:
   flutter_test:
@@ -31,7 +33,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/login/
-    - assets/landing/
     - assets/images/
 
 # Native splash (Android / iOS). Regenerate after changes: dart run flutter_native_splash:create

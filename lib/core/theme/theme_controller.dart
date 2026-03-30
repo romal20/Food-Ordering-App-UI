@@ -1,3 +1,4 @@
+// Theme controller for GetX-based light/dark switching.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 class ThemeController extends GetxController {
   final Rx<ThemeMode> themeMode = ThemeMode.system.obs;
 
+  /// Sets the current [themeMode] explicitly.
   void setThemeMode(ThemeMode mode) => themeMode.value = mode;
 
   /// Toggles between light and dark based on how the app is currently rendered.
@@ -19,5 +21,6 @@ class ThemeController extends GetxController {
     themeMode.value = usingDark ? ThemeMode.light : ThemeMode.dark;
   }
 
+  /// Restores OS-driven theme mode.
   void useSystem() => themeMode.value = ThemeMode.system;
 }

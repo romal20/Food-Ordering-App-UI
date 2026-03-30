@@ -1,11 +1,17 @@
+// Theme definitions for both light and dark modes (Material 3).
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
+/// Provides `ThemeData` for the application.
+///
+/// This class builds its theme from the centralized color palette in
+/// [AppColors] and applies consistent typography using `google_fonts`.
 class AppTheme {
   AppTheme._();
 
+  /// Constructs the base text theme for both light and dark modes.
   static TextTheme _textThemeLight(ColorScheme scheme) {
     final primary = scheme.onSurface;
     final secondary = scheme.onSurfaceVariant;
@@ -92,6 +98,7 @@ class AppTheme {
     );
   }
 
+  /// Full light `ThemeData` used when `ThemeMode.light` is active.
   static ThemeData get lightTheme {
     final scheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,
@@ -195,6 +202,7 @@ class AppTheme {
     );
   }
 
+  /// Full dark `ThemeData` used when `ThemeMode.dark` is active.
   static ThemeData get darkTheme {
     final scheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,

@@ -1,7 +1,9 @@
+// Reusable, styled text field used across login and other forms.
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../core/theme/app_colors.dart';
 
+/// Material 3-inspired text field with consistent decoration and typography.
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
